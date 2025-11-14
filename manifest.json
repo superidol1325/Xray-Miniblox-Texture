@@ -1,22 +1,41 @@
 {
-"update_url": "https://clients2.google.com/service/update2/crx",
-
   "manifest_version": 3,
-  "name": "Xray Texture Pack x B2B",
-  "version": "1.6.12",
-  "description": "A browser extension to mod an online game. Some parts made by Heythereu",
-  "author": "Superidol",
-  "background": {"service_worker": "background.js"},
+
+  "name": "Miniblox Texture Pack",
+  "version": "1.0.0",
+  "description": "A Chrome extension that replaces the Miniblox spritesheet with a custom texture pack for educational purposes.",
+
   "icons": {
     "128": "icon.png"
   },
-  "permissions": [
-   "declarativeNetRequestWithHostAccess"
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://miniblox.io/*",
+        "https://miniblox.online/*",
+        "https://miniblox.org/*"
+      ],
+      "js": ["inject.js"],
+      "run_at": "document_start"
+    }
   ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["spritesheet.png"],
+      "matches": [
+        "https://miniblox.io/*",
+        "https://miniblox.online/*",
+        "https://miniblox.org/*"
+      ]
+    }
+  ],
+
+  "permissions": [],
   "host_permissions": [
     "https://miniblox.io/*",
     "https://miniblox.online/*",
-    "https://miniblox.org/*",
-    "https://raw.githubusercontent.com/*"
+    "https://miniblox.org/*"
   ]
 }
