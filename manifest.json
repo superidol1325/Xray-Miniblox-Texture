@@ -1,41 +1,28 @@
 {
   "manifest_version": 3,
-
-  "name": "Miniblox Texture Pack",
-  "version": "1.0.0",
-  "description": "A Chrome extension that replaces the Miniblox spritesheet with a custom texture pack for educational purposes.",
-
+  "name": "Xray Miniblox Texture",
+  "version": "1.0",
+  "description": "Xray and custom textures for Miniblox.io",
   "icons": {
-    "128": "icon.png"
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
   },
-
-  "content_scripts": [
-    {
-      "matches": [
-        "https://miniblox.io/*",
-        "https://miniblox.online/*",
-        "https://miniblox.org/*"
-      ],
-      "js": ["inject.js"],
-      "run_at": "document_start"
-    }
-  ],
-
-  "web_accessible_resources": [
-    {
-      "resources": ["spritesheet.png"],
-      "matches": [
-        "https://miniblox.io/*",
-        "https://miniblox.online/*",
-        "https://miniblox.org/*"
-      ]
-    }
-  ],
-
-  "permissions": [],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["declarativeNetRequest", "declarativeNetRequestWithHostAccess"],
   "host_permissions": [
-    "https://miniblox.io/*",
-    "https://miniblox.online/*",
-    "https://miniblox.org/*"
-  ]
+    "*://*.miniblox.io/*",
+    "*://raw.githubusercontent.com/*"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "background.js"
+      }
+    ]
+  }
 }
